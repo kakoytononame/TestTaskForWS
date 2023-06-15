@@ -13,8 +13,8 @@ public class TestService
 
     public async Task<string> Get()
     {
-        var id = Guid.Parse("52f163d0-e358-4e11-9f82-dcce1ca464ff");
-        var result=await (await _baseHttpService.Get($"http://localhost:5112/User/Get?id={id}")).Content.ReadAsStringAsync();
+        var name = "Folder1.1.1";
+        var result=await (await _baseHttpService.Get($"http://localhost:5112/User/Get?ParrentName={name}")).Content.ReadAsStringAsync();
         return result;
     }
 
@@ -29,9 +29,8 @@ public class TestService
         var JsonData = JsonContent.Create(
             new
             {
-                Id = Guid.Parse("52f163d0-e358-4e11-9f82-dcce1ca464ff"),
-                Login = "TestUser",
-                Password = "NewPassword"
+                Id = Guid.Parse("52f163d0-e358-4e11-9f82-dcce1caaaaaa"),
+                Name = "Folder1.1.1"
             });
 
         var response = await _baseHttpService.Put($"http://localhost:5112/User/Update", JsonData);
@@ -41,8 +40,8 @@ public class TestService
 
     public async Task<string> Delete()
     {
-        var id = Guid.Parse("a7be82ef-05f3-44d8-a60e-b00895d5c82f"); //удаление пользователя номер 5;
-        var response = await _baseHttpService.Delete("http://localhost:5112/User/Delete",id);
+        var name = "Folder1.1.1";
+        var response = await _baseHttpService.Delete("http://localhost:5112/User/Delete",name);
         var result =await response.Content.ReadAsStringAsync();
         return result;
     }
@@ -52,25 +51,12 @@ public class TestService
         var JsonData = JsonContent.Create(
             new
             {
-                Login = "NewTestUser",
-                Password = "NewPassword"
+                ParrentName = "Folder1",
+                NewName = "Folder1.3"
             });
         var response = await _baseHttpService.Post("http://localhost:5112/User/Create", JsonData);
         var result = await response.Content.ReadAsStringAsync();
         return result;
-    }
-
-    public void Test()
-    {
-        var JsonData = JsonContent.Create(
-            new
-            {
-                Id = Guid.Parse("52f163d0-e358-4e11-9f82-dcce1ca464ff"),
-                Login = "TestUser",
-                Password = "NewPassword"
-            });
-
-        var response =  _baseHttpService.Put($"http://localhost:5112/User/Update", JsonData).Result;
-        var result= response.Content.ReadAsStringAsync().Result;
-    }
+    }   
+    
 }

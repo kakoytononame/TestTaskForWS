@@ -10,7 +10,7 @@ public interface IBaseHttpService
 
     public Task<HttpResponseMessage> Post(string URL, JsonContent data);
 
-    public Task<HttpResponseMessage> Delete(string URL, Guid id);
+    public Task<HttpResponseMessage> Delete(string URL, String name);
 
 
 }

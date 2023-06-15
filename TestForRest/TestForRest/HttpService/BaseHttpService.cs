@@ -30,8 +30,8 @@ public class BaseHttpService:IBaseHttpService
        return await _httpClient.PostAsync(URL,data);
     }
 
-    public async Task<HttpResponseMessage> Delete(string URL,Guid id)
+    public async Task<HttpResponseMessage> Delete(string URL,String name)
     {
-        return await _httpClient.DeleteAsync(URL+$"?id={id}");
+        return await _httpClient.DeleteAsync(URL+$"?Name={name}");
     }
 }
